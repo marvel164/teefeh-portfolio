@@ -77,28 +77,28 @@ const Hero = () => {
         <motion.img
           src={Profile}
           alt="Profile"
-          className="absolute left-10 top-20 md:top-10 lg:top-15 w-20 h-20 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[23px]"
+          className="absolute left-10 top-16 md:top-10 lg:top-15 w-15 h-15 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[23px]"
           whileHover={{ scale: 1.1 }}
           animate={bounceLoop}
         />
         <motion.img
           src={Profile}
           alt="Profile"
-          className="absolute left-10 bottom-20 md:bottom-16 lg:bottom-16 w-20 h-20 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[23px]"
+          className="absolute left-10 bottom-14 md:bottom-16 lg:bottom-16 w-15 h-15 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[23px]"
           whileHover={{ scale: 1.1 }}
           animate={bounceLoop}
         />
         <motion.img
           src={Profile}
           alt="Profile"
-          className="absolute right-10 top-20 md:top-10 lg:top-15 w-20 h-20 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[23px]"
+          className="absolute right-10 top-16 md:top-10 lg:top-15 w-15 h-15 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[23px]"
           whileHover={{ scale: 1.1 }}
           animate={bounceLoop}
         />
         <motion.img
           src={Profile}
           alt="Profile"
-          className="absolute right-10 bottom-20 md:bottom-16 lg:bottom-16 w-20 h-20 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[23px]"
+          className="absolute right-10 bottom-14 md:bottom-16 lg:bottom-16 w-15 h-15 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[23px]"
           whileHover={{ scale: 1.1 }}
           animate={bounceLoop}
         />
@@ -136,7 +136,7 @@ const Hero = () => {
               },
             }}
             viewport={{ once: false }}
-            className="mt-8 text-[#252525] block text-[16px] leading-[1.8] max-w-215 mx-auto font-normal font-['Inter']"
+            className="mt-8 text-[#252525] block text-[12px] md:text-[14px] lg:text-[16px] leading-[1.8] max-w-215 mx-auto font-normal font-['Inter']"
           >
             I am a Business Data Analyst who transforms complex data into
             actionable insights that <br />
