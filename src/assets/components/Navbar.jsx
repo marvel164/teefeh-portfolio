@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Menu } from "lucide-react";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -53,13 +54,13 @@ const Navbar = () => {
           custom={0}
           variants={fadeDown}
         >
-          <span className="text-[#E31616] font-black text-2xl tracking-wide cursor-pointer font-['Inter']">
+          <span className="text-[#E31616] font-black text-2xl tracking-wide cursor-pointer ">
             TEEFEH
           </span>
         </motion.a>
 
         {/* Nav Links */}
-        <ul className="hidden md:flex items-center gap-10">
+        <ul className="hidden md:flex items-center gap-10 uppercase">
           {navLinks.map((link, i) => (
             <motion.li
               key={link.label}
@@ -73,7 +74,7 @@ const Navbar = () => {
                 className="relative inline-block text-[#E31616] text-sm font-semibold transition"
                 whileHover={{
                   scale: 1.1,
-                  color: "#b91c1c",
+                  color: "#E31616",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.querySelector("span").style.transform =
@@ -107,12 +108,21 @@ const Navbar = () => {
         >
           <motion.a
             href="#contact"
-            whileHover={{ scale: 1.1, backgroundColor: "#b91c1c" }} // 20% increase
+            whileHover={{ scale: 1.1, backgroundColor: "#E31616" }} // 20% increase
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="inline-block bg-[#E31616] text-white px-6 py-2 rounded font-medium"
+            className="hidden md:inline-block lg:inline-block bg-[#E31616] text-white px-6 py-2 rounded font-medium"
           >
             VIEW MY RESUME
+          </motion.a>
+          <motion.a
+            href="#contact"
+            whileHover={{ scale: 1.1, backgroundColor: "#E31616" }} // 20% increase
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="inline-block md:hidden lg:hidden bg-[#E31616] text-white px-6 py-2 rounded font-medium"
+          >
+            <Menu size={22} />
           </motion.a>
         </motion.div>
       </nav>

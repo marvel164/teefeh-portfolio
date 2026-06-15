@@ -20,7 +20,7 @@ const ServiceCard = () => {
           variants={fadeInUp}
           className="flex justify-center mb-4"
         >
-          <span className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#FFF5F5] text-[#C94B4B] text-xs font-semibold uppercase tracking-widest">
+          <span className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#FFF5F5] text-[#E31616] text-xs font-semibold uppercase tracking-widest">
             What I Do
           </span>
         </motion.div>
@@ -33,7 +33,7 @@ const ServiceCard = () => {
           variants={fadeInUp}
           className="flex justify-center"
         >
-          <span className="text-center text-[#D53A3A] font-bold text-xl md:text-2xl lg:text-4xl leading-tight uppercase font-['Cormorant_Garamond']">
+          <span className="text-center text-[#E31616] font-bold text-xl md:text-2xl lg:text-4xl leading-tight uppercase font-['Cormorant_Garamond']">
             How I Help Businesses <br /> Grow with Data
           </span>
         </motion.div>
@@ -46,10 +46,11 @@ const ServiceCard = () => {
           variants={fadeInUp}
           className="flex justify-center"
         >
-          <span className="max-w-2xl mx-auto mt-2 text-center text-[#252525] text-sm leading-6 font-['Inter']">
+          <span className="max-w-2xl mx-auto mt-2 text-center text-[#252525] text-[15px] md:text-[18px] lg:text-[18px] leading-6 font-['Inter']">
             I transform complex data into clear actionable insights that help
-            businesses make smarter decisions, improve performance, and achieve
-            measurable growth.
+            businesses make <br />
+            smarter decisions, improve performance, and achieve measurable
+            growth.
           </span>
         </motion.div>
 
@@ -59,23 +60,23 @@ const ServiceCard = () => {
             {
               icon: <Users size={24} className="text-[#D53A3A]" />,
               title: "Customer Behaviour Analysis",
-              text: "I uncover behavioural patterns, churn risks, and retention opportunities by analyzing engagement rates, drop-off points, and performance trends."
+              text: "Using fintech and customer data, I uncover behavioural patterns, churn risks, and retention opportunities. I’ve also analysed product and service performance data including lottery and digital service platforms by tracking engagement rates, drop-off points, and performance trends that help businesses understand what’s working and where users are disengaging. My analysis has directly informed retention and product strategies across multiple service lines.",
             },
             {
               icon: <Target size={24} className="text-[#D53A3A]" />,
               title: "Business Performance Optimization",
-              text: "I identify inefficiencies in operations and reporting workflows, building dashboards and automated solutions to improve speed and performance."
+              text: "I identify where business operations and reporting workflows are losing time and efficiency then build the dashboards and data solutions that fix it. From automating manual reporting cycles to streamlining how teams access performance data, my work has measurably reduced the time it takes to get from raw data to business decision.",
             },
             {
               icon: <LineChart size={24} className="text-[#D53A3A]" />,
               title: "Data-Driven Decision Support",
-              text: "I connect complex data to executive decision-making through Power BI dashboards and SQL-driven reporting."
+              text: "I connect complex data to executive decision-making by delivering Power BI dashboards and SQL-driven reports that put the right insight in front of the right people, exactly when they need it. Because in fast-moving business environments, timing and clarity are just as important as the data itself.",
             },
             {
               icon: <TrendingUp size={24} className="text-[#D53A3A]" />,
               title: "Revenue Growth Insight",
-              text: "I analyze sales and transactional data to uncover growth opportunities, highlight high-performing streams, and support pricing strategies."
-            }
+              text: "I analyze sales and transactional data to surface growth opportunities. Identifying high-performing revenue streams, flagging underperforming areas, and helping organizations optimize pricing and commercial strategy with confidence.",
+            },
           ].map((card, i) => (
             <motion.div
               key={i}

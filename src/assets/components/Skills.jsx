@@ -21,7 +21,7 @@ const Skills = () => {
             variants={fadeInUp}
             className="flex justify-center"
           >
-            <span className="inline-flex items-center px-5 py-2 rounded-full bg-white text-[#D52B2B] text-xs font-semibold uppercase tracking-wider shadow-sm">
+            <span className="inline-flex items-center px-5 py-2 rounded-full bg-white text-[#E31616] text-xs font-semibold uppercase tracking-wider shadow-sm">
               Expertise
             </span>
           </motion.div>
@@ -35,7 +35,7 @@ const Skills = () => {
             transition={{ delay: 0.2 }}
             className="text-center mt-8"
           >
-            <span className="font-serif text-[#D52B2B] text-2xl md:text-3xl lg:text-5xl font-bold">
+            <span className="font-serif text-[#E31616] text-2xl md:text-3xl lg:text-5xl font-bold">
               Technical Skills
             </span>
             <br />
@@ -59,12 +59,12 @@ const Skills = () => {
               className="bg-[#F7F6EC] rounded-3xl p-8 md:p-10 shadow-sm border border-[#EFEFEF]"
             >
               {/* Icon */}
-              <div className="w-16 h-16 rounded-2xl bg-[#FF1717] flex items-center justify-center shadow-lg">
-                <BarChart3 size={30} className="text-white" />
+              <div className="w-11 h-11 md:w-16 md:h-16 lg:w-16 lg:h-16 rounded-2xl bg-[#FF1717] flex items-center justify-center shadow-lg">
+                <BarChart3 size={25} className="text-white" />
               </div>
-
+<br />
               {/* Title */}
-              <span className="mt-8 text-[#D52B2B] text-3xl font-bold">
+              <span className="mt-8 text-[#D52B2B] text-md md:text-3xl lg:text-3xl font-bold">
                 Data Analysis & Visualization
               </span>
 
@@ -75,7 +75,7 @@ const Skills = () => {
                 viewport={{ once: false, amount: 0.2 }}
                 variants={fadeInUp}
                 transition={{ delay: 0.4 }}
-                className="flex flex-wrap gap-3 mt-8"
+                className="flex flex-wrap gap-2 mt-8"
               >
                 {[
                   "SQL",
@@ -91,7 +91,7 @@ const Skills = () => {
                 ].map((tag, i) => (
                   <span
                     key={i}
-                    className="px-4 py-2 bg-white border border-[#ECECEC] rounded-xl text-sm font-medium text-[#444444] shadow-sm"
+                    className="px-2 py-2 bg-white border border-[#ECECEC] rounded-xl text-xs font-medium text-[#444444] shadow-sm"
                   >
                     {tag}
                   </span>
@@ -125,7 +125,7 @@ const Skills = () => {
                 viewport={{ once: false, amount: 0.2 }}
                 variants={fadeInUp}
                 transition={{ delay: 0.6 }}
-                className="flex flex-wrap gap-3 mt-8"
+                className="flex flex-wrap gap-2 mt-8"
               >
                 {[
                   "Microsoft Excel (Advanced)",
@@ -135,7 +135,7 @@ const Skills = () => {
                 ].map((tag, i) => (
                   <span
                     key={i}
-                    className="px-4 py-2 bg-white border border-[#ECECEC] rounded-xl text-sm font-medium text-[#444444] shadow-sm"
+                    className="px-2 py-2 bg-white border border-[#ECECEC] rounded-xl text-xs font-medium text-[#444444] shadow-sm"
                   >
                     {tag}
                   </span>

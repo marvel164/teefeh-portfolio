@@ -22,7 +22,7 @@ const Projects = () => {
             variants={fadeInUp}
             className="flex justify-center mb-4"
           >
-            <span className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#dad9d9] text-[#C94B4B] text-xs font-semibold uppercase tracking-widest">
+            <span className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#dad9d9] text-[#E31616] text-xs font-semibold uppercase tracking-widest">
               Projects
             </span>
           </motion.div>
@@ -35,7 +35,7 @@ const Projects = () => {
             variants={fadeInUp}
             className="text-center mb-10"
           >
-            <span className="font-serif text-xl md:text-2xl lg:text-4xl font-bold uppercase text-[#D52B2B]">
+            <span className="font-serif text-xl md:text-2xl lg:text-4xl font-bold uppercase text-[#E31616]">
               Project Showcase
             </span>
             <br />

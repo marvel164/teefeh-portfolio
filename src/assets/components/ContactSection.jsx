@@ -1,7 +1,7 @@
 "use client";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
 import React from "react";
-import { BsInstagram, BsWhatsapp } from "react-icons/bs";
+import { BsInstagram, BsTwitter, BsWhatsapp } from "react-icons/bs";
 import { LiaLinkedin } from "react-icons/lia";
 import { motion } from "framer-motion";
 
@@ -23,12 +23,12 @@ const ContactSection = () => {
             variants={fadeInUp}
             className="text-center"
           >
-            <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-white text-[#D52B2B] text-xs font-semibold uppercase tracking-wider shadow-sm">
+            <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-white text-[#E31616] text-xs font-semibold uppercase tracking-wider shadow-sm">
               Contact
             </span>
             <br />
             <br />
-            <span className="mt-6 font-serif text-[#D52B2B] text-xl md:text-2xl lg:text-4xl font-bold">
+            <span className="mt-6 font-serif text-[#E31616] text-xl md:text-2xl lg:text-4xl font-bold">
               Let's Work Together
             </span>
             <br />
@@ -66,7 +66,9 @@ const ContactSection = () => {
                   <div>
                     <span className="text-xs text-white/70">Email</span>
                     <br />
-                    <span className="font-medium">yname@email.com</span>
+                    <span className="font-medium text-[12px]">
+                      akotunewamipo@gmail.com
+                    </span>
                   </div>
                 </div>
 
@@ -78,7 +80,9 @@ const ContactSection = () => {
                   <div>
                     <span className="text-xs text-white/70">Phone</span>
                     <br />
-                    <span className="font-medium">+234 800 0000</span>
+                    <span className="font-medium text-[12px]">
+                      +2348059785152
+                    </span>
                   </div>
                 </div>
 
@@ -90,7 +94,9 @@ const ContactSection = () => {
                   <div>
                     <span className="text-xs text-white/70">Location</span>
                     <br />
-                    <span className="font-medium">Lagos, Nigeria</span>
+                    <span className="font-medium text-[12px]">
+                      Lagos, Nigeria
+                    </span>
                   </div>
                 </div>
               </div>
@@ -119,6 +125,19 @@ const ContactSection = () => {
                 >
                   <BsWhatsapp size={18} />
                 </a>
+                <a
+                  href="#"
+                  className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-[#FF1717] hover:scale-105 transition"
+                >
+                  <BsTwitter size={18} />
+                </a>
+              </div>
+
+              <div className="my-6 p-4 text-center bg-white/40 backdrop-blur-3xl backdrop-saturate-150 border-white/20 rounded-2xl shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]">
+                <div className="text-md"> Open to opportunities </div>
+                <span className="text-sm font-normal">
+                  Full-time, contract, and consulting
+                </span>
               </div>
             </motion.div>
 
@@ -129,7 +148,7 @@ const ContactSection = () => {
               viewport={{ once: false, amount: 0.2 }}
               variants={fadeInUp}
               transition={{ delay: 0.3 }}
-              className="bg-white rounded-2xl p-6 shadow-sm"
+              className="bg-white rounded-2xl p-6 shadow-sm "
             >
               <form className="space-y-4">
                 <div>
@@ -154,6 +173,16 @@ const ContactSection = () => {
                   />
                 </div>
 
+                <div>
+                  <label className="block mb-1 text-sm font-medium text-[#2D2D2D]">
+                    Company
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Your Company Name"
+                    className="w-full px-4 py-3 rounded-lg border border-[#E5E7EB] outline-none focus:border-[#FF1717]"
+                  />
+                </div>
                 <div>
                   <label className="block mb-1 text-sm font-medium text-[#2D2D2D]">
                     Subject
@@ -183,6 +212,12 @@ const ContactSection = () => {
                   Send Message
                   <Send size={16} />
                 </button>
+
+                <div className="text-center mt-4">
+                  <p className="text-sm text-[#2D2D2D]">
+                    I'll get back to you within 24 hours!
+                  </p>
+                </div>
               </form>
             </motion.div>
           </div>

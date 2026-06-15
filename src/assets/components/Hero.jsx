@@ -3,12 +3,18 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Profile from "../images/profile.jpg";
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+// Bounce loop definition
+const bounceLoop = {
+  y: [0, -20, 0],
+  transition: {
+    duration: 0.8,
+    repeat: Infinity,
+    repeatType: "loop",
+    ease: "easeInOut",
+  },
 };
 
-// Infinite Typewriter hook with immediate first character
+// Infinite Typewriter hook
 const useTypewriter = (text, speed = 100, pause = 1500) => {
   const [displayed, setDisplayed] = useState(() =>
     text && text.length ? text[0] : "",
@@ -19,7 +25,7 @@ const useTypewriter = (text, speed = 100, pause = 1500) => {
     let i = 0;
     let forward = true;
     let interval;
-    const reducedPause = 300; // shorter pause when the text hits the first char (e.g., 'B')
+    const reducedPause = 300;
 
     const run = () => {
       setIsTyping(true);
@@ -52,7 +58,6 @@ const useTypewriter = (text, speed = 100, pause = 1500) => {
       }, speed);
     };
 
-    // Start from second character if text has at least one char
     i = text && text.length ? 1 : 0;
     if (i > 0) run();
 
@@ -68,60 +73,47 @@ const Hero = () => {
   return (
     <div className="bg-[#F6F3EC]">
       <section className="relative max-w-7xl mx-auto min-h-[85vh] flex items-center justify-center px-6">
-        {/* Floating Images */}
+        {/* Floating Images with bounce only */}
         <motion.img
           src={Profile}
           alt="Profile"
-          className="absolute left-6 top-5 md:top-10 lg:top-10 w-20 h-20 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[34px]"
-          whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
-          initial="hidden"
-          whileInView="visible"
-          variants={fadeInUp}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: false }}
+          className="absolute left-10 top-20 md:top-10 lg:top-15 w-20 h-20 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[23px]"
+          whileHover={{ scale: 1.1 }}
+          animate={bounceLoop}
         />
         <motion.img
           src={Profile}
           alt="Profile"
-          className="absolute left-10 bottom-3 md:bottom-16 lg:bottom-16 w-20 h-20 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[34px]"
-          whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
-          initial="hidden"
-          whileInView="visible"
-          variants={fadeInUp}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: false }}
+          className="absolute left-10 bottom-20 md:bottom-16 lg:bottom-16 w-20 h-20 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[23px]"
+          whileHover={{ scale: 1.1 }}
+          animate={bounceLoop}
         />
         <motion.img
           src={Profile}
           alt="Profile"
-          className="absolute right-6 top-5 md:top-10 lg:top-10 w-20 h-20 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[34px]"
-          whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
-          initial="hidden"
-          whileInView="visible"
-          variants={fadeInUp}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: false }}
+          className="absolute right-10 top-20 md:top-10 lg:top-15 w-20 h-20 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[23px]"
+          whileHover={{ scale: 1.1 }}
+          animate={bounceLoop}
         />
         <motion.img
           src={Profile}
           alt="Profile"
-          className="absolute right-10 bottom-3 md:bottom-16 lg:bottom-16 w-20 h-20 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[34px]"
-          whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
-          initial="hidden"
-          whileInView="visible"
-          variants={fadeInUp}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          viewport={{ once: false }}
+          className="absolute right-10 bottom-20 md:bottom-16 lg:bottom-16 w-20 h-20 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[23px]"
+          whileHover={{ scale: 1.1 }}
+          animate={bounceLoop}
         />
 
-        {/* Content */}
+        {/* Content with entrance animation preserved */}
         <div className="max-w-4xl text-center">
           <motion.span
             initial="hidden"
             whileInView="visible"
-            variants={fadeInUp}
+            variants={{
+              hidden: { opacity: 0, y: 40 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+            }}
             viewport={{ once: false }}
-            className="text-[#E31616] uppercase font-bold leading-[1.02] text-[32px] md:text-[40px] lg:text-[58px] font-['Cormorant_Garamond']"
+            className="text-[#E31616] uppercase font-bold leading-[1.02] text-[25px] md:text-[40px] lg:text-[50px] font-['Cormorant_Garamond']"
           >
             HI, MY NAME IS <br /> {typedName}
             <motion.span
@@ -135,45 +127,51 @@ const Hero = () => {
           <motion.p
             initial="hidden"
             whileInView="visible"
-            variants={fadeInUp}
-            transition={{ delay: 0.2 }}
+            variants={{
+              hidden: { opacity: 0, y: 40 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.6, delay: 0.2 },
+              },
+            }}
             viewport={{ once: false }}
-            className="mt-8 text-[#252525] hidden md:block lg:block text-[18px] leading-[1.8] max-w-215 mx-auto font-normal font-['Inter']"
+            className="mt-8 text-[#252525] block text-[16px] leading-[1.8] max-w-215 mx-auto font-normal font-['Inter']"
           >
-            I'm a Business Data Analyst who transforms complex, high-volume data
-            into clear <br />
-            insights that drive smarter business decisions. Specializing in
-            Power BI, SQL and Excel <br />
-            within fintech and software service environments, I've analyzed
-            datasets exceeding 10 <br />
-            million records, uncovered customer churn and retention patterns
-            that directly shaped <br />
-            retention strategy, and built dashboards that significantly reduced
-            reporting turnaround <br />
-            putting the right information in front of decision-makers exactly
-            when they need it.
+            I am a Business Data Analyst who transforms complex data into
+            actionable insights that <br />
+            drive smarter business decision. Using Power Bi, SQL, and Excel, I
+            uncover trends, <br />
+            optimize reporting, and help businesses make data-driven decisions
+            with confidence.
           </motion.p>
 
           {/* Buttons */}
           <motion.div
             initial="hidden"
             whileInView="visible"
-            variants={fadeInUp}
-            transition={{ delay: 0.4 }}
+            variants={{
+              hidden: { opacity: 0, y: 40 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.6, delay: 0.4 },
+              },
+            }}
             viewport={{ once: false }}
-            className="mt-10 flex justify-center gap-5"
+            className="mt-14 flex justify-center gap-5"
           >
             <motion.button
-              whileHover={{ scale: 1.08, transition: { duration: 0.2 } }}
+              whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-[#E31616] text-white text-[13px] px-6 py-3 rounded-sm shadow-[0_10px_20px_rgba(255,26,26,0.15)] font-bold transition"
+              className="bg-[#E31616] text-white text-[11px] md:text-[13px] lg:text-[13px] px-6 py-3 rounded-sm shadow-[0_10px_20px_rgba(255,26,26,0.15)] font-bold transition"
             >
               EXPLORE MY WORK
             </motion.button>
             <motion.button
-              whileHover={{ scale: 1.08, transition: { duration: 0.2 } }}
+              whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-transparent border border-[#E8B9B9] text-[13px] text-[#E31616] px-6 py-3 rounded-sm font-bold transition"
+              className="bg-transparent border border-[#E8B9B9] text-[11px] md:text-[13px] lg:text-[13px] text-[#E31616] px-6 py-3 rounded-sm font-bold transition"
             >
               CONTACT ME
             </motion.button>

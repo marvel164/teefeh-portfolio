@@ -21,7 +21,7 @@ const Certifications = () => {
             variants={fadeInUp}
             className="flex justify-center"
           >
-            <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-white text-[#D52B2B] text-xs font-semibold uppercase tracking-wider shadow-sm">
+            <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-white text-[#E31616] text-xs font-semibold uppercase tracking-wider shadow-sm">
               Credentials
             </span>
           </motion.div>
@@ -35,7 +35,7 @@ const Certifications = () => {
             transition={{ delay: 0.2 }}
             className="text-center mt-6"
           >
-            <span className="font-serif text-[#D52B2B] text-xl md:text-2xl lg:text-4xl font-bold">
+            <span className="font-serif text-[#E31616] text-xl md:text-2xl lg:text-4xl font-bold">
               Certifications
             </span>
             <br />
