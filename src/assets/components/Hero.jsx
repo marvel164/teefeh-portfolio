@@ -7,7 +7,7 @@ import Profile from "../images/profile.jpg";
 const bounceLoop = {
   y: [0, -20, 0],
   transition: {
-    duration: 0.8,
+    duration: 1.3,
     repeat: Infinity,
     repeatType: "loop",
     ease: "easeInOut",
