@@ -77,28 +77,28 @@ const Hero = () => {
         <motion.img
           src={Profile}
           alt="Profile"
-          className="absolute left-10 top-16 md:top-10 lg:top-15 w-15 h-15 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[23px]"
+          className="absolute left-10 top-16 md:top-10 lg:top-15 w-17 h-17 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[20px]"
           whileHover={{ scale: 1.1 }}
           animate={bounceLoop}
         />
         <motion.img
           src={Profile}
           alt="Profile"
-          className="absolute left-10 bottom-14 md:bottom-16 lg:bottom-16 w-15 h-15 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[23px]"
+          className="absolute left-10 bottom-14 md:bottom-16 lg:bottom-16 w-17 h-17 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[20px]"
           whileHover={{ scale: 1.1 }}
           animate={bounceLoop}
         />
         <motion.img
           src={Profile}
           alt="Profile"
-          className="absolute right-10 top-16 md:top-10 lg:top-15 w-15 h-15 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[23px]"
+          className="absolute right-10 top-16 md:top-10 lg:top-15 w-17 h-17 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[20px]"
           whileHover={{ scale: 1.1 }}
           animate={bounceLoop}
         />
         <motion.img
           src={Profile}
           alt="Profile"
-          className="absolute right-10 bottom-14 md:bottom-16 lg:bottom-16 w-15 h-15 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[23px]"
+          className="absolute right-10 bottom-14 md:bottom-16 lg:bottom-16 w-17 h-17 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[20px]"
           whileHover={{ scale: 1.1 }}
           animate={bounceLoop}
         />
