@@ -39,7 +39,12 @@ const Certifications = () => {
               Certifications
             </span>
             <br />
-            <span className="max-w-3xl mx-auto mt-3 text-[#252525] text-xs leading-6 block">
+            <span className="max-w-3xl mx-auto mt-3 text-[#252525] text-xs leading-6 hidden md:block lg:block">
+              I'm passionate about expanding my knowledge and sharpening my
+              analytical skills. These certifications <br />are milestones in my
+              journey of continuous professional development.
+            </span>
+            <span className="max-w-3xl mx-auto mt-3 text-[#252525] text-xs leading-6 block md:hidden lg:hidden">
               I'm passionate about expanding my knowledge and sharpening my
               analytical skills. These certifications are milestones in my
               journey of continuous professional development.

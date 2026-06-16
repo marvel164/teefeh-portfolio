@@ -12,8 +12,8 @@ const fadeInUp = {
 
 const ContactSection = () => {
   return (
-    <div>
-      <section className="bg-[#FEDDDC] py-12 px-6">
+    <div id="contact">
+      <section className="bg-[#FEDDDC] py-24 px-6">
         <div className="max-w-6xl mx-auto">
           {/* Section Heading */}
           <motion.div
@@ -108,25 +108,33 @@ const ContactSection = () => {
               <span className="font-semibold text-sm">Connect With Me</span>
               <div className="flex gap-3 mt-3">
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/in/boluwatife-akotun-401566394?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-[#FF1717] hover:scale-105 transition"
                 >
                   <LiaLinkedin size={26} />
                 </a>
                 <a
-                  href="#"
+                  href="https://www.instagram.com/teefeh_sapphire?igsh=dGNrZHNmZjFmbnpp&utm_source=qr"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-[#FF1717] hover:scale-105 transition"
                 >
                   <BsInstagram size={18} />
                 </a>
                 <a
-                  href="#"
+                  href="https://wa.link/70n44z"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-[#FF1717] hover:scale-105 transition"
                 >
                   <BsWhatsapp size={18} />
                 </a>
                 <a
-                  href="#"
+                  href="https://x.com/akotun_b?s=11"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-[#FF1717] hover:scale-105 transition"
                 >
                   <BsTwitter size={18} />
@@ -158,7 +166,7 @@ const ContactSection = () => {
                   <input
                     type="text"
                     placeholder="Enter your name"
-                    className="w-full px-4 py-3 rounded-lg border border-[#E5E7EB] outline-none focus:border-[#FF1717]"
+                    className="w-full px-4 py-3 text-[#2D2D2D] rounded-lg border border-[#E5E7EB] outline-none focus:border-[#FF1717]"
                   />
                 </div>
 
@@ -169,7 +177,7 @@ const ContactSection = () => {
                   <input
                     type="email"
                     placeholder="Enter your email"
-                    className="w-full px-4 py-3 rounded-lg border border-[#E5E7EB] outline-none focus:border-[#FF1717]"
+                    className="w-full px-4 py-3 text-[#2D2D2D] rounded-lg border border-[#E5E7EB] outline-none focus:border-[#FF1717]"
                   />
                 </div>
 
@@ -180,7 +188,7 @@ const ContactSection = () => {
                   <input
                     type="text"
                     placeholder="Your Company Name"
-                    className="w-full px-4 py-3 rounded-lg border border-[#E5E7EB] outline-none focus:border-[#FF1717]"
+                    className="w-full px-4 py-3 text-[#2D2D2D] rounded-lg border border-[#E5E7EB] outline-none focus:border-[#FF1717]"
                   />
                 </div>
                 <div>
@@ -190,7 +198,7 @@ const ContactSection = () => {
                   <input
                     type="text"
                     placeholder="What's this about?"
-                    className="w-full px-4 py-3 rounded-lg border border-[#E5E7EB] outline-none focus:border-[#FF1717]"
+                    className="w-full px-4 py-3 text-[#2D2D2D] rounded-lg border border-[#E5E7EB] outline-none focus:border-[#FF1717]"
                   />
                 </div>
 
@@ -201,7 +209,7 @@ const ContactSection = () => {
                   <textarea
                     rows="5"
                     placeholder="Tell me about your project..."
-                    className="w-full px-4 py-3 rounded-lg border border-[#E5E7EB] outline-none resize-none focus:border-[#FF1717]"
+                    className="w-full px-4 py-3 text-[#2D2D2D] rounded-lg border border-[#E5E7EB] outline-none resize-none focus:border-[#FF1717]"
                   />
                 </div>
 

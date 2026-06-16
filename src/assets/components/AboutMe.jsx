@@ -20,7 +20,7 @@ const fadeInImage = {
 
 const AboutMe = () => {
   return (
-    <div>
+    <div id="about">
       <section className="bg-[#F7F6EC]">
         <div className="grid lg:grid-cols-2 min-h-screen">
           {/* Left Content */}

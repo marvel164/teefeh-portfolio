@@ -37,11 +37,16 @@ const Expertise = () => {
               Core Expertise
             </span>
             <br />
-            <span className="max-w-3xl mx-auto mt-3 text-[#252525] text-[15px] leading-6 block">
+            <span className="max-w-3xl mx-auto hidden md:block lg:block mt-3 text-[#252525] text-[15px] leading-6">
               These are the capabilities that shape how I approach data,
               combining technical analysis, business <br />
               understanding, and clear communication to deliver actionable
               insights.
+            </span>
+            <span className="max-w-3xl mx-auto block md:hidden lg:hidden mt-3 text-[#252525] text-[15px] leading-6">
+              These are the capabilities that shape how I approach data,
+              combining technical analysis, business understanding, and clear
+              communication to deliver actionable insights.
             </span>
           </motion.div>
 

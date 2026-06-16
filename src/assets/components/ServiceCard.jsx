@@ -46,11 +46,24 @@ const ServiceCard = () => {
           variants={fadeInUp}
           className="flex justify-center"
         >
-          <span className="max-w-2xl mx-auto mt-2 text-center text-[#252525] text-[15px] md:text-[18px] lg:text-[18px] leading-6 font-['Inter']">
+          <span className="max-w-2xl hidden md:block lg:block mx-auto mt-2 text-center text-[#252525] text-[15px] md:text-[18px] lg:text-[18px] leading-6 font-['Inter']">
             I transform complex data into clear actionable insights that help
             businesses make <br />
             smarter decisions, improve performance, and achieve measurable
             growth.
+          </span>
+        </motion.div>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.2 }}
+          variants={fadeInUp}
+          className="flex justify-center"
+        >
+          <span className="max-w-2xl block md:hidden lg:hidden mx-auto mt-2 text-center text-[#252525] text-[15px] md:text-[18px] lg:text-[18px] leading-6 font-['Inter']">
+            I transform complex data into clear actionable insights that help
+            businesses make smarter decisions, improve performance, and achieve
+            measurable growth.
           </span>
         </motion.div>
 

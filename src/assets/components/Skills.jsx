@@ -10,7 +10,7 @@ const fadeInUp = {
 
 const Skills = () => {
   return (
-    <div>
+    <div id="skills">
       <section className="bg-[#FEDDDC] py-24 px-6">
         <div className="max-w-7xl mx-auto">
           {/* Badge */}
@@ -39,9 +39,15 @@ const Skills = () => {
               Technical Skills
             </span>
             <br />
-            <span className="max-w-4xl mx-auto mt-6 text-[#252525] text-sm leading-8">
+            <span className="max-w-4xl hidden md:block lg:block mx-auto mt-6 text-[#252525] text-sm leading-8">
               I leverage a core set of analytical and visualization tools built
-              around Power BI, SQL and Excel to analyze <br />complex data, model
+              around Power BI, SQL and Excel to analyze <br />
+              complex data, model business performance, and deliver insights
+              that drive real decisions.
+            </span>
+            <span className="max-w-4xl block md:hidden lg:hidden mx-auto mt-6 text-[#252525] text-sm leading-8">
+              I leverage a core set of analytical and visualization tools built
+              around Power BI, SQL and Excel to analyze complex data, model
               business performance, and deliver insights that drive real
               decisions.
             </span>
@@ -62,7 +68,7 @@ const Skills = () => {
               <div className="w-11 h-11 md:w-16 md:h-16 lg:w-16 lg:h-16 rounded-2xl bg-[#FF1717] flex items-center justify-center shadow-lg">
                 <BarChart3 size={25} className="text-white" />
               </div>
-<br />
+              <br />
               {/* Title */}
               <span className="mt-8 text-[#D52B2B] text-md md:text-3xl lg:text-3xl font-bold">
                 Data Analysis & Visualization
@@ -109,12 +115,13 @@ const Skills = () => {
               className="bg-[#F7F6EC] rounded-3xl p-8 md:p-10 shadow-sm border border-[#EFEFEF]"
             >
               {/* Icon */}
-              <div className="w-16 h-16 rounded-2xl bg-[#FF1717] flex items-center justify-center shadow-lg">
-                <Wrench size={28} className="text-white" />
+              <div className="w-11 h-11 md:w-16 md:h-16 lg:w-16 lg:h-16 rounded-2xl bg-[#FF1717] flex items-center justify-center shadow-lg">
+                <Wrench size={25} className="text-white" />
               </div>
 
+              <br />
               {/* Title */}
-              <span className="mt-8 text-[#D52B2B] text-3xl font-bold">
+              <span className="mt-8 text-[#D52B2B] text-md md:text-3xl lg:text-3xl font-bold">
                 Tools & Technologies
               </span>
 

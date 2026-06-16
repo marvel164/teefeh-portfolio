@@ -11,8 +11,8 @@ const fadeInUp = {
 
 const Projects = () => {
   return (
-    <div>
-      <section className="bg-[#F7F6EC] py-12 px-4">
+    <div id="projects">
+      <section className="bg-[#F7F6EC] py-24 px-4">
         <div className="max-w-6xl mx-auto">
           {/* Badge */}
           <motion.div
