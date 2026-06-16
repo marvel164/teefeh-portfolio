@@ -80,28 +80,28 @@ const Hero = () => {
         <motion.img
           src={Profile1}
           alt="Profile1"
-          className="absolute left-10 top-16 md:top-10 lg:top-15 w-17 h-17 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[20px]"
+          className="absolute left-10 top-22 md:top-10 lg:top-15 w-17 h-17 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[20px]"
           whileHover={{ scale: 1.1 }}
           animate={bounceLoop}
         />
         <motion.img
           src={Profile2}
           alt="Profile2"
-          className="absolute left-10 bottom-14 md:bottom-16 lg:bottom-16 w-17 h-17 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[20px]"
+          className="absolute left-10 bottom-22 md:bottom-16 lg:bottom-16 w-17 h-17 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[20px]"
           whileHover={{ scale: 1.1 }}
           animate={bounceLoop}
         />
         <motion.img
           src={Profile3}
           alt="Profile3"
-          className="absolute right-10 top-16 md:top-10 lg:top-15 w-17 h-17 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[20px]"
+          className="absolute right-10 top-22 md:top-10 lg:top-15 w-17 h-17 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[20px]"
           whileHover={{ scale: 1.1 }}
           animate={bounceLoop}
         />
         <motion.img
           src={Profile4}
           alt="Profile4"
-          className="absolute right-10 bottom-14 md:bottom-16 lg:bottom-16 w-17 h-17 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[20px]"
+          className="absolute right-10 bottom-22 md:bottom-16 lg:bottom-16 w-17 h-17 lg:w-28 lg:h-28 md:w-28 md:h-28 object-cover rounded-[20px]"
           whileHover={{ scale: 1.1 }}
           animate={bounceLoop}
         />
@@ -183,20 +183,22 @@ const Hero = () => {
             viewport={{ once: false }}
             className="mt-14 flex justify-center gap-5"
           >
-            <motion.button
+            <motion.a
+              href="#projects"
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
               className="bg-[#E31616] text-white text-[11px] md:text-[13px] lg:text-[13px] px-6 py-3 rounded-sm shadow-[0_10px_20px_rgba(255,26,26,0.15)] font-bold transition"
             >
               EXPLORE MY WORK
-            </motion.button>
-            <motion.button
+            </motion.a>
+            <motion.a
+            href="#contact"
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
               className="bg-transparent border border-[#E8B9B9] text-[11px] md:text-[13px] lg:text-[13px] text-[#E31616] px-6 py-3 rounded-sm font-bold transition"
             >
               CONTACT ME
-            </motion.button>
+            </motion.a>
           </motion.div>
         </div>
       </section>
