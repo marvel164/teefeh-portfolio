@@ -35,7 +35,7 @@ const Skills = () => {
             transition={{ delay: 0.2 }}
             className="text-center mt-8"
           >
-            <span className="font-serif text-[#E31616] text-2xl md:text-3xl lg:text-5xl font-bold">
+            <span className="font-sans text-[#E31616] text-2xl md:text-3xl lg:text-5xl font-bold">
               Technical Skills
             </span>
             <br />

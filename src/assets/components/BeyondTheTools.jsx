@@ -51,7 +51,7 @@ const BeyondTheTools = () => {
                   variants={fadeInUp}
                   transition={{ delay: 0.2 }}
                 >
-                  <span className="font-serif text-white text-md md:text-2xl lg:text-3xl font-bold leading-tight">
+                  <span className="font-sans text-white text-md md:text-2xl lg:text-3xl font-bold leading-tight">
                     Beyond The Tools
                   </span>
                   <br />

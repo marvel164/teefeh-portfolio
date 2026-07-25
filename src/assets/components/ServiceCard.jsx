@@ -33,7 +33,7 @@ const ServiceCard = () => {
           variants={fadeInUp}
           className="flex justify-center"
         >
-          <span className="text-center text-[#E31616] font-bold text-xl md:text-2xl lg:text-4xl leading-tight uppercase font-['Cormorant_Garamond']">
+          <span className="text-center text-[#E31616] font-bold text-xl md:text-2xl lg:text-4xl leading-tight uppercase font-['Inter']">
             How I Help Businesses <br /> Grow with Data
           </span>
         </motion.div>
@@ -53,6 +53,7 @@ const ServiceCard = () => {
             growth.
           </span>
         </motion.div>
+
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -103,9 +104,11 @@ const ServiceCard = () => {
               <div className="w-14 h-14 rounded-xl bg-white flex items-center justify-center mb-4">
                 {card.icon}
               </div>
+
               <span className="text-white text-base font-bold mb-3 block">
                 {card.title}
               </span>
+
               <span className="text-[#D8C8C8] text-sm leading-6">
                 {card.text}
               </span>

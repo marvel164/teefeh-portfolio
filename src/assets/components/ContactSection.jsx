@@ -28,7 +28,7 @@ const ContactSection = () => {
             </span>
             <br />
             <br />
-            <span className="mt-6 font-serif text-[#E31616] text-xl md:text-2xl lg:text-4xl font-bold">
+            <span className="mt-6 font-sans text-[#E31616] text-xl md:text-2xl lg:text-4xl font-bold">
               Let's Work Together
             </span>
             <br />

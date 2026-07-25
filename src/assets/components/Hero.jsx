@@ -116,7 +116,7 @@ const Hero = () => {
               visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
             }}
             viewport={{ once: false }}
-            className="text-[#E31616] uppercase font-bold leading-[1.02] text-[25px] md:text-[40px] lg:text-[50px] font-['Cormorant_Garamond']"
+            className="text-[#E31616] uppercase font-bold leading-[1.02] text-[25px] md:text-[40px] lg:text-[50px] font-['Inter']"
           >
             HI, MY NAME IS <br /> {typedName}
             <motion.span

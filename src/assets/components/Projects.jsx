@@ -1,15 +1,75 @@
 "use client";
-import { ArrowUpRight } from "lucide-react";
-import React from "react";
-import Presentation from "../images/presentation.png";
-import { motion } from "framer-motion";
+
+import React, { useEffect, useState } from "react";
+import { ArrowUpRight, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+
+import SalesPerformance from "../images/sales_performance.jpg";
+import CustomerRetention from "../images/customer_retention.jpg";
+import SupplyChain from "../images/supply_chain.jpg";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6 },
+  },
 };
 
 const Projects = () => {
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  const projects = [
+    {
+      title: "Sales Performance Analysis",
+      image: SalesPerformance,
+      desc: "Analyzed regional sales rep performance and revenue trends against quarterly targets, tracking attainment rates across 9 sales reps and 6 regions to pinpoint where deals were being won and lost.",
+      impact:
+        "Surfaced a 72% overall target attainment rate and identified top and bottom performing reps and regions, giving leadership a clear roadmap for coaching and resource allocation to close the ₦84M revenue gap.",
+    },
+    {
+      title: "Customer Retention Analysis",
+      image: CustomerRetention,
+      desc: "Examined 18 months of subscription customer data to uncover churn drivers across subscription tiers, customer segments, and NPS categories, mapping churn patterns by region to flag high-risk markets.",
+      impact:
+        "Revealed a 31.8% churn rate concentrated in the Basic tier and Individual/Startup segments, enabling targeted retention campaigns that protect the ₦75K+ in customer lifetime revenue at risk.",
+    },
+    {
+      title: "Supply Chain Analytics",
+      image: SupplyChain,
+      desc: "Built an executive-level view of supplier performance, logistics, and inventory health across skincare, haircare, and cosmetics product lines, consolidating defect rates, QC status, and stock levels into a single dashboard.",
+      impact:
+        "Flagged 14 stock alerts and 41 pending quality checks while identifying Supplier 5 as the highest defect-rate contributor, giving procurement teams the visibility needed to cut waste and improve supplier accountability.",
+    },
+  ];
+
+  // Disable body scroll while modal is open
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [selectedProject]);
+
+  // Close on ESC
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setSelectedProject(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   return (
     <div id="projects">
       <section className="bg-[#F7F6EC] py-24 px-4">
@@ -22,7 +82,7 @@ const Projects = () => {
             variants={fadeInUp}
             className="flex justify-center mb-4"
           >
-            <span className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#dad9d9] text-[#E31616] text-xs font-semibold uppercase tracking-widest">
+            <span className="inline-flex items-center justify-center rounded-full bg-[#dad9d9] px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#E31616]">
               Projects
             </span>
           </motion.div>
@@ -33,9 +93,9 @@ const Projects = () => {
             whileInView="visible"
             viewport={{ once: false, amount: 0.2 }}
             variants={fadeInUp}
-            className="text-center mb-10"
+            className="mb-10 text-center"
           >
-            <span className="font-serif text-xl md:text-2xl lg:text-4xl font-bold uppercase text-[#E31616]">
+            <span className="font-sans text-xl font-bold uppercase text-[#E31616] md:text-2xl lg:text-4xl">
               Project Showcase
             </span>
             <br />
@@ -45,70 +105,50 @@ const Projects = () => {
           </motion.div>
 
           {/* Grid */}
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mx-6">
-            {[
-              {
-                title: "Sales Performance Analysis",
-                desc: "Identified key factors behind declining revenue across regions, uncovering underperforming areas and opportunities for recovery.",
-                impact: "Highlighted strategies to improve regional performance and drive growth."
-              },
-              {
-                title: "Customer Churn Prediction",
-                desc: "Analyzed customer data to identify patterns and predict churn, enabling proactive retention strategies.",
-                impact: "Provided insights to reduce customer loss and improve long-term value."
-              },
-              {
-                title: "Inventory Optimization",
-                desc: "Balanced stock levels to reduce excess inventory while preventing stockouts.",
-                impact: "Improved cost efficiency and ensured better product availability."
-              },
-              {
-                title: "Marketing Campaign ROI Analysis",
-                desc: "Measured effectiveness of marketing channels to identify high-performing campaigns.",
-                impact: "Enabled smarter budget allocation and improved ROI."
-              },
-              {
-                title: "Pricing Strategy Analysis",
-                desc: "Optimized pricing strategies using market trends and customer behaviour.",
-                impact: "Supported decisions balancing demand and revenue growth."
-              },
-              {
-                title: "Operational Efficiency Study",
-                desc: "Identified bottlenecks in fulfillment and delivery processes.",
-                impact: "Improved efficiency, reduced delays, and enhanced service performance."
-              }
-            ].map((project, i) => (
+          <div className="mx-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {projects.map((project, i) => (
               <motion.article
                 key={i}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: false, amount: 0.2 }}
                 variants={fadeInUp}
-                transition={{ delay: i * 0.2 }}
-                className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+                transition={{ delay: i * 0.15 }}
+                className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
               >
                 {/* Image */}
-                <div className="h-48 overflow-hidden">
-                  <img
-                    src={Presentation}
-                    alt={project.title}
-                    className="h-full w-full object-cover transition duration-300 hover:scale-105"
-                  />
+                <div className="bg-gray-50 p-3">
+                  <div
+                    className="h-52 cursor-pointer overflow-hidden rounded-xl"
+                    onClick={() => setSelectedProject(project)}
+                  >
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="h-full w-full object-cover transition duration-300 hover:scale-105"
+                    />
+                  </div>
                 </div>
 
                 {/* Content */}
                 <div className="p-4">
-                  <span className="text-base font-bold text-[#D52B2B] mb-2 block">
+                  <h3 className="mb-2 text-base font-bold text-[#D52B2B]">
                     {project.title}
-                  </span>
-                  <span className="text-[#252525] text-xs leading-6 block mb-2">
+                  </h3>
+
+                  <p className="mb-2 text-xs leading-6 text-[#252525]">
                     {project.desc}
-                  </span>
-                  <span className="text-[#252525] text-xs leading-6 block mb-3">
+                  </p>
+
+                  <p className="mb-4 text-xs leading-6 text-[#252525]">
                     <span className="font-bold text-[#D52B2B]">Impact:</span>{" "}
                     {project.impact}
-                  </span>
-                  <button className="inline-flex items-center gap-2 rounded-md bg-[#FF2020] px-4 py-2 text-white text-xs font-medium transition hover:bg-[#E11D1D]">
+                  </p>
+
+                  <button
+                    onClick={() => setSelectedProject(project)}
+                    className="inline-flex cursor-pointer items-center gap-2 rounded-md bg-[#FF2020] px-4 py-2 text-xs font-medium text-white transition hover:bg-[#E11D1D]"
+                  >
                     View Dashboard
                     <ArrowUpRight size={16} />
                   </button>
@@ -118,6 +158,58 @@ const Projects = () => {
           </div>
         </div>
       </section>
+
+      {/* ================= MODAL ================= */}
+
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-md p-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedProject(null)}
+          >
+            {/* Close Button */}
+            <motion.button
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedProject(null)}
+              className="absolute top-6 right-6 z-20 cursor-pointer rounded-full bg-white p-3 shadow-lg transition hover:rotate-90 hover:bg-red-500 hover:text-white"
+            >
+              <X size={24} />
+            </motion.button>
+
+            {/* Image Wrapper */}
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{
+                type: "spring",
+                stiffness: 120,
+                damping: 18,
+              }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative inline-block"
+            >
+              <img
+                src={selectedProject.image}
+                alt={selectedProject.title}
+                className="max-h-[90vh] max-w-[92vw] h-auto w-auto rounded-2xl shadow-2xl object-contain"
+              />
+
+              {/* Floating Title */}
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 rounded-full bg-black/75 px-6 py-3 backdrop-blur-md">
+                <h3 className="text-center text-sm font-semibold text-white md:text-base">
+                  {selectedProject.title}
+                </h3>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

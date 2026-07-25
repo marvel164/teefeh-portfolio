@@ -33,7 +33,7 @@ const Expertise = () => {
             variants={fadeInUp}
             className="text-center mt-6"
           >
-            <span className="font-serif text-[#E31616] text-lg md:text-2xl lg:text-4xl font-bold">
+            <span className="font-sans text-[#E31616] text-lg md:text-2xl lg:text-4xl font-bold">
               Core Expertise
             </span>
             <br />
