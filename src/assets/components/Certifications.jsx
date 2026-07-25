@@ -5,7 +5,7 @@ import React from "react";
 import { Download } from "lucide-react";
 
 import Udemy from "../images/udemy.jpg";
-import AltSchoolAfrica from "../images/altSchool_Africa.jpg";
+import AltSchoolAfrica from "../images/altSchool_africa.jpg";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
