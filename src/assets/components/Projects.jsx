@@ -192,7 +192,7 @@ const Projects = () => {
                 damping: 18,
               }}
               onClick={(e) => e.stopPropagation()}
-              className="relative inline-block"
+              className="relative inline-block pb-7 md:pb-8"
             >
               <img
                 src={selectedProject.image}
@@ -201,10 +201,12 @@ const Projects = () => {
               />
 
               {/* Floating Title */}
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 rounded-full bg-black/75 px-6 py-3 backdrop-blur-md">
-                <h3 className="text-center text-sm font-semibold text-white md:text-base">
-                  {selectedProject.title}
-                </h3>
+              <div className="absolute left-1/2 bottom-[-12px] md:bottom-[-14px] -translate-x-1/2 z-10">
+                <div className="rounded-full bg-black/80 backdrop-blur-md px-4 py-2 md:px-5 md:py-2.5 shadow-xl border border-white/10">
+                  <h3 className="whitespace-nowrap text-[10px] md:text-sm lg:text-base font-semibold text-white">
+                    {selectedProject.title}
+                  </h3>
+                </div>
               </div>
             </motion.div>
           </motion.div>
