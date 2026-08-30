@@ -1,12 +1,15 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { ArrowUpRight, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import React from "react";
+import { ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 import SalesPerformance from "../images/sales_performance.jpg";
 import CustomerRetention from "../images/customer_retention.jpg";
 import SupplyChain from "../images/supply_chain.jpg";
+import TelecomVAS from "../images/telecom_vas.jpg";
+import FintechFraud from "../images/fintech_fraud.jpg";
+import FMCGFinancial from "../images/fmcg_financial.jpg";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -18,57 +21,56 @@ const fadeInUp = {
 };
 
 const Projects = () => {
-  const [selectedProject, setSelectedProject] = useState(null);
-
   const projects = [
     {
-      title: "Sales Performance Analysis",
-      image: SalesPerformance,
-      desc: "Analyzed regional sales rep performance and revenue trends against quarterly targets, tracking attainment rates across 9 sales reps and 6 regions to pinpoint where deals were being won and lost.",
+      title: "Supply Chain Analytics",
+      image: SupplyChain,
+      desc: "Profiled and cleaned a 100-SKU beauty products dataset spanning 5 Nigerian cities and 5 suppliers. Built a full KPI report covering revenue, defect rates, supplier performance, inventory health, and logistics cost analysis across product categories.",
       impact:
-        "Surfaced a 72% overall target attainment rate and identified top and bottom performing reps and regions, giving leadership a clear roadmap for coaching and resource allocation to close the ₦84M revenue gap.",
+        "Surfaced a critical supplier with zero inspection passes across 18 SKUs and identified 57 revenue anomalies enabling targeted supplier review and data governance action.",
+      link: "https://github.com/Teefeh-dataanalyst/Supply-Chain-Analysis",
     },
     {
       title: "Customer Retention Analysis",
       image: CustomerRetention,
-      desc: "Examined 18 months of subscription customer data to uncover churn drivers across subscription tiers, customer segments, and NPS categories, mapping churn patterns by region to flag high-risk markets.",
+      desc: "Analysed 1,000 fintech subscription customers across 6 Nigerian regions to identify churn drivers including payment failures, low product engagement, and acquisition channel quality. Built an interactive Power BI dashboard with cohort-level and segment-level retention breakdowns.",
       impact:
-        "Revealed a 31.8% churn rate concentrated in the Basic tier and Individual/Startup segments, enabling targeted retention campaigns that protect the ₦75K+ in customer lifetime revenue at risk.",
+        "Identified that Basic tier customers churn at 48.8%, nearly 9x the Enterprise rate and that payment failures carry a 0.70 correlation with churn, enabling a targeted early warning intervention strategy.",
+      link: "https://github.com/Teefeh-dataanalyst/Customer-Retention-Analysis",
     },
     {
-      title: "Supply Chain Analytics",
-      image: SupplyChain,
-      desc: "Built an executive-level view of supplier performance, logistics, and inventory health across skincare, haircare, and cosmetics product lines, consolidating defect rates, QC status, and stock levels into a single dashboard.",
+      title: "Sales Performance Dashboard",
+      image: SalesPerformance,
+      desc: "Built an end-to-end sales analytics solution for a Nigerian B2B technology company with 12 sales reps across 6 regions. Designed a star schema model in Excel, established Power BI relationships, and developed DAX measures covering revenue, targets, attainment rate, and rep performance grids.",
       impact:
-        "Flagged 14 stock alerts and 41 pending quality checks while identifying Supplier 5 as the highest defect-rate contributor, giving procurement teams the visibility needed to cut waste and improve supplier accountability.",
+        "Revealed that 10 of 12 reps hit their monthly target at least once reframing the narrative from team underperformance to a consistency problem, and highlighting where coaching effort should be directed.",
+      link: "https://github.com/Teefeh-dataanalyst/Sales-Performance-",
+    },
+    {
+      title: "Telecom VAS Revenue Analytics",
+      image: TelecomVAS,
+      desc: "Designed and populated a 4-table MySQL relational database for a VAS platform operating across 6 Nigerian regions. Wrote a 5-section SQL KPI query library covering revenue, ARPU, failure rates, service penetration, and subscriber churn behaviour. Connected Power BI directly to MySQL via SQL views.",
+      impact:
+        "Identified that monthly subscription services drive stronger subscriber stickiness than daily services, and that App channel subscribers renew at significantly higher rates supporting a channel prioritization recommendation.",
+      link: "https://github.com/Teefeh-dataanalyst/Telecom-VAS-Revenue-Analytics",
+    },
+    {
+      title: "Fintech Fraud Pattern Analysis",
+      image: FintechFraud,
+      desc: "Built a 4-table MySQL fraud analytics database from scratch and wrote advanced SQL including window functions, velocity detection via self-join, time-of-day pattern analysis, and a composite risk scoring system using weighted CASE logic. Delivered 6 SQL views connected directly to a Power BI fraud dashboard.",
+      impact:
+        "Uncovered that 100% of flagged transactions occurred between midnight and 05:00 through a single unverified merchant providing the foundation for a targeted real-time fraud detection rule.",
+      link: "https://github.com/Teefeh-dataanalyst/Fintech-Transactions-Fraud-Analysis-Pattern",
+    },
+    {
+      title: "FMCG Financial Performance & Budget Variance",
+      image: FMCGFinancial,
+      desc: "Analysed 24 months of budget vs actual financial data for a Nigerian FMCG company across 10 products, 6 regions, and 4 sales channels. Built a 5-table star schema in Excel, developed 30+ DAX measures covering revenue, gross margin, opex, net profit, variance, and YoY time intelligence, and designed a single-page financial performance dashboard.",
+      impact:
+        "Identified a consistent 3% revenue budget miss across both 2023 and 2024 driven by chronic underperformance in Sunlight Dish Soap and Vaseline Body Lotion pointing to a product-level commercial review rather than a broad market problem.",
+      link: "https://github.com/Teefeh-dataanalyst/FMCG-Financial-Performance-Budget-Variance-Analysis",
     },
   ];
-
-  // Disable body scroll while modal is open
-  useEffect(() => {
-    if (selectedProject) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [selectedProject]);
-
-  // Close on ESC
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape") {
-        setSelectedProject(null);
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
 
   return (
     <div id="projects">
@@ -118,10 +120,7 @@ const Projects = () => {
               >
                 {/* Image */}
                 <div className="bg-gray-50 p-3">
-                  <div
-                    className="h-52 cursor-pointer overflow-hidden rounded-xl"
-                    onClick={() => setSelectedProject(project)}
-                  >
+                  <div className="h-52 overflow-hidden rounded-xl">
                     <img
                       src={project.image}
                       alt={project.title}
@@ -141,12 +140,18 @@ const Projects = () => {
                   </p>
 
                   <p className="mb-4 text-xs leading-6 text-[#252525]">
-                    <span className="font-bold text-[#D52B2B]">Impact:</span>{" "}
+                    <span className="font-bold text-[#D52B2B]">
+                      Impact:
+                    </span>{" "}
                     {project.impact}
                   </p>
 
+                  {/* GitHub Redirect - Opens in New Tab */}
                   <button
-                    onClick={() => setSelectedProject(project)}
+                    type="button"
+                    onClick={() => {
+                      window.open(project.link, "_blank", "noopener,noreferrer");
+                    }}
                     className="inline-flex cursor-pointer items-center gap-2 rounded-md bg-[#FF2020] px-4 py-2 text-xs font-medium text-white transition hover:bg-[#E11D1D]"
                   >
                     View Dashboard
@@ -158,60 +163,6 @@ const Projects = () => {
           </div>
         </div>
       </section>
-
-      {/* ================= MODAL ================= */}
-
-      <AnimatePresence>
-        {selectedProject && (
-          <motion.div
-            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-md p-6"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedProject(null)}
-          >
-            {/* Close Button */}
-            <motion.button
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedProject(null)}
-              className="absolute top-6 right-6 z-20 cursor-pointer rounded-full bg-white p-3 shadow-lg transition hover:rotate-90 hover:bg-red-500 hover:text-white"
-            >
-              <X size={24} />
-            </motion.button>
-
-            {/* Image Wrapper */}
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{
-                type: "spring",
-                stiffness: 120,
-                damping: 18,
-              }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative inline-block pb-7 md:pb-8"
-            >
-              <img
-                src={selectedProject.image}
-                alt={selectedProject.title}
-                className="max-h-[90vh] max-w-[92vw] h-auto w-auto rounded-2xl shadow-2xl object-contain"
-              />
-
-              {/* Floating Title */}
-              <div className="absolute left-1/2 bottom-[-12px] md:bottom-[-14px] -translate-x-1/2 z-10">
-                <div className="rounded-full bg-black/80 backdrop-blur-md px-4 py-2 md:px-5 md:py-2.5 shadow-xl border border-white/10">
-                  <h3 className="whitespace-nowrap text-[10px] md:text-sm lg:text-base font-semibold text-white">
-                    {selectedProject.title}
-                  </h3>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };
