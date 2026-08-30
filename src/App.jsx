@@ -9,6 +9,7 @@ import Navbar from "./assets/components/Navbar";
 import Projects from "./assets/components/Projects";
 import ServiceCard from "./assets/components/ServiceCard";
 import Skills from "./assets/components/Skills";
+import FeaturedProfile from "./assets/components/FeaturedProfile";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
       {/* Apply top padding to the content wrapper, not Navbar */}
       <div className="pt-16">
         <Hero />
+        <FeaturedProfile />
         <ServiceCard />
         <Projects />
         <Expertise />

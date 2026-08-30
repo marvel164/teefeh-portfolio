@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-} from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 import { motion } from "framer-motion";
 
@@ -28,7 +23,7 @@ const LINE_BASE = {
   r: 110,
   g: 45,
   b: 45,
-  a: 0.10,
+  a: 0.1,
 };
 
 const NODE_BASE_RADIUS = 1.4;
@@ -53,6 +48,7 @@ function lerpColor(base, active, t) {
 
 /* ============================================================
    KINETIC GRID
+   Desktop / Tablet only
    ============================================================ */
 
 const KineticGrid = () => {
@@ -82,48 +78,30 @@ const KineticGrid = () => {
      ---------------------------------------------------------- */
 
   const getWarpedPoint = useCallback(
-    (
-      gx,
-      gy,
-      col,
-      row,
-      mouse,
-      ripples,
-      cols,
-      rows
-    ) => {
+    (gx, gy, col, row, mouse, ripples, cols, rows) => {
       const edgeMargin = 1.5;
 
       const colPin = Math.min(
         col / edgeMargin,
         (cols - 1 - col) / edgeMargin,
-        1
+        1,
       );
 
       const rowPin = Math.min(
         row / edgeMargin,
         (rows - 1 - row) / edgeMargin,
-        1
+        1,
       );
 
-      const pinFactor =
-        colPin *
-        colPin *
-        rowPin *
-        rowPin;
+      const pinFactor = colPin * colPin * rowPin * rowPin;
 
       const dx = gx - mouse.x;
       const dy = gy - mouse.y;
 
-      const distance = Math.sqrt(
-        dx * dx + dy * dy
-      );
+      const distance = Math.sqrt(dx * dx + dy * dy);
 
       const proximity =
-        Math.max(
-          0,
-          1 - distance / INFLUENCE_RADIUS
-        ) * pinFactor;
+        Math.max(0, 1 - distance / INFLUENCE_RADIUS) * pinFactor;
 
       /* ------------------------------------------------------
          Ripple displacement
@@ -136,46 +114,26 @@ const KineticGrid = () => {
         const rdx = gx - ripple.x;
         const rdy = gy - ripple.y;
 
-        const rippleDistance = Math.sqrt(
-          rdx * rdx + rdy * rdy
-        );
+        const rippleDistance = Math.sqrt(rdx * rdx + rdy * rdy);
 
         const waveWidth = 55;
 
-        const difference =
-          rippleDistance - ripple.radius;
+        const difference = rippleDistance - ripple.radius;
 
-        if (
-          Math.abs(difference) <
-          waveWidth
-        ) {
+        if (Math.abs(difference) < waveWidth) {
           const strength =
-            (1 -
-              Math.abs(difference) /
-                waveWidth) *
+            (1 - Math.abs(difference) / waveWidth) *
             ripple.opacity *
             18 *
             pinFactor;
 
-          const angle = Math.atan2(
-            rdy,
-            rdx
-          );
+          const angle = Math.atan2(rdy, rdx);
 
-          const sign =
-            difference < 0 ? -1 : 1;
+          const sign = difference < 0 ? -1 : 1;
 
-          rippleX +=
-            Math.cos(angle) *
-            strength *
-            sign *
-            -1;
+          rippleX += Math.cos(angle) * strength * sign * -1;
 
-          rippleY +=
-            Math.sin(angle) *
-            strength *
-            sign *
-            -1;
+          rippleY += Math.sin(angle) * strength * sign * -1;
         }
       }
 
@@ -183,49 +141,21 @@ const KineticGrid = () => {
          Cursor warp
          ------------------------------------------------------ */
 
-      if (
-        distance <
-          INFLUENCE_RADIUS &&
-        distance > 0 &&
-        pinFactor > 0
-      ) {
-        const t =
-          distance /
-          INFLUENCE_RADIUS;
+      if (distance < INFLUENCE_RADIUS && distance > 0 && pinFactor > 0) {
+        const t = distance / INFLUENCE_RADIUS;
 
         const eased =
-          t < 0.01
-            ? 0
-            : (1 - t) *
-              (1 - t) *
-              Math.min(
-                1,
-                distance / 60
-              );
+          t < 0.01 ? 0 : (1 - t) * (1 - t) * Math.min(1, distance / 60);
 
-        const warpAmount =
-          eased *
-          MAX_WARP *
-          pinFactor;
+        const warpAmount = eased * MAX_WARP * pinFactor;
 
-        const angle = Math.atan2(
-          dy,
-          dx
-        );
+        const angle = Math.atan2(dy, dx);
 
         return {
           point: {
-            x:
-              gx -
-              Math.cos(angle) *
-                warpAmount +
-              rippleX,
+            x: gx - Math.cos(angle) * warpAmount + rippleX,
 
-            y:
-              gy -
-              Math.sin(angle) *
-                warpAmount +
-              rippleY,
+            y: gy - Math.sin(angle) * warpAmount + rippleY,
           },
 
           proximity,
@@ -241,7 +171,7 @@ const KineticGrid = () => {
         proximity,
       };
     },
-    []
+    [],
   );
 
   /* ----------------------------------------------------------
@@ -250,71 +180,39 @@ const KineticGrid = () => {
 
   const draw = useCallback(
     (now) => {
-      const canvas =
-        canvasRef.current;
+      const canvas = canvasRef.current;
 
       if (!canvas) return;
 
-      const ctx =
-        canvas.getContext("2d");
+      const ctx = canvas.getContext("2d");
 
       if (!ctx) return;
 
-      const {
-        width,
-        height,
-      } = sizeRef.current;
+      const { width, height } = sizeRef.current;
 
-      if (
-        !width ||
-        !height
-      ) {
+      if (!width || !height) {
         return;
       }
 
-      const mouse =
-        mouseRef.current;
+      const mouse = mouseRef.current;
 
-      const ripples =
-        ripplesRef.current;
+      const ripples = ripplesRef.current;
 
       /* Clear */
 
-      ctx.clearRect(
-        0,
-        0,
-        width,
-        height
-      );
+      ctx.clearRect(0, 0, width, height);
 
       /* ------------------------------------------------------
          Subtle dot texture
          ------------------------------------------------------ */
 
-      ctx.fillStyle =
-        "rgba(180, 35, 35, 0.055)";
+      ctx.fillStyle = "rgba(180, 35, 35, 0.055)";
 
-      for (
-        let x =
-          DOT_SPACING / 2;
-        x < width;
-        x += DOT_SPACING
-      ) {
-        for (
-          let y =
-            DOT_SPACING / 2;
-          y < height;
-          y += DOT_SPACING
-        ) {
+      for (let x = DOT_SPACING / 2; x < width; x += DOT_SPACING) {
+        for (let y = DOT_SPACING / 2; y < height; y += DOT_SPACING) {
           ctx.beginPath();
 
-          ctx.arc(
-            x,
-            y,
-            0.8,
-            0,
-            Math.PI * 2
-          );
+          ctx.arc(x, y, 0.8, 0, Math.PI * 2);
 
           ctx.fill();
         }
@@ -324,35 +222,16 @@ const KineticGrid = () => {
          Update ripples
          ------------------------------------------------------ */
 
-      for (
-        let i =
-          ripples.length - 1;
-        i >= 0;
-        i--
-      ) {
-        const ripple =
-          ripples[i];
+      for (let i = ripples.length - 1; i >= 0; i--) {
+        const ripple = ripples[i];
 
-        const age =
-          (now -
-            ripple.born) /
-          1000;
+        const age = (now - ripple.born) / 1000;
 
-        ripple.radius =
-          Math.max(
-            0,
-            age * 400
-          );
+        ripple.radius = Math.max(0, age * 400);
 
-        ripple.opacity =
-          Math.max(
-            0,
-            1 - age * 1.2
-          );
+        ripple.opacity = Math.max(0, 1 - age * 1.2);
 
-        if (
-          ripple.opacity <= 0
-        ) {
+        if (ripple.opacity <= 0) {
           ripples.splice(i, 1);
         }
       }
@@ -361,65 +240,36 @@ const KineticGrid = () => {
          Build grid
          ------------------------------------------------------ */
 
-      const cols =
-        Math.max(
-          2,
-          Math.ceil(
-            width /
-              CELL_SIZE
-          )
-        ) + 1;
+      const cols = Math.max(2, Math.ceil(width / CELL_SIZE)) + 1;
 
-      const rows =
-        Math.max(
-          2,
-          Math.ceil(
-            height /
-              CELL_SIZE
-          )
-        ) + 1;
+      const rows = Math.max(2, Math.ceil(height / CELL_SIZE)) + 1;
 
-      const cellWidth =
-        width /
-        (cols - 1);
+      const cellWidth = width / (cols - 1);
 
-      const cellHeight =
-        height /
-        (rows - 1);
+      const cellHeight = height / (rows - 1);
 
       const points = [];
       const proximities = [];
 
-      for (
-        let row = 0;
-        row < rows;
-        row++
-      ) {
+      for (let row = 0; row < rows; row++) {
         points[row] = [];
         proximities[row] = [];
 
-        for (
-          let col = 0;
-          col < cols;
-          col++
-        ) {
-          const result =
-            getWarpedPoint(
-              col * cellWidth,
-              row * cellHeight,
-              col,
-              row,
-              mouse,
-              ripples,
-              cols,
-              rows
-            );
+        for (let col = 0; col < cols; col++) {
+          const result = getWarpedPoint(
+            col * cellWidth,
+            row * cellHeight,
+            col,
+            row,
+            mouse,
+            ripples,
+            cols,
+            rows,
+          );
 
-          points[row][col] =
-            result.point;
+          points[row][col] = result.point;
 
-          proximities[row][col] =
-            result.proximity;
+          proximities[row][col] = result.proximity;
         }
       }
 
@@ -434,47 +284,20 @@ const KineticGrid = () => {
         a: 0.75,
       };
 
-      const drawSegment = (
-        point1,
-        point2,
-        proximity1,
-        proximity2
-      ) => {
-        const average =
-          (proximity1 +
-            proximity2) /
-          2;
+      const drawSegment = (point1, point2, proximity1, proximity2) => {
+        const average = (proximity1 + proximity2) / 2;
 
-        const t =
-          average *
-          average *
-          (3 - 2 * average);
+        const t = average * average * (3 - 2 * average);
 
         ctx.beginPath();
 
-        ctx.moveTo(
-          point1.x,
-          point1.y
-        );
+        ctx.moveTo(point1.x, point1.y);
 
-        ctx.lineTo(
-          point2.x,
-          point2.y
-        );
+        ctx.lineTo(point2.x, point2.y);
 
-        ctx.strokeStyle =
-          lerpColor(
-            LINE_BASE,
-            activeColor,
-            t
-          );
+        ctx.strokeStyle = lerpColor(LINE_BASE, activeColor, t);
 
-        ctx.lineWidth =
-          lerp(
-            0.7,
-            1.5,
-            t
-          );
+        ctx.lineWidth = lerp(0.7, 1.5, t);
 
         ctx.stroke();
       };
@@ -483,42 +306,26 @@ const KineticGrid = () => {
 
       /* Horizontal */
 
-      for (
-        let row = 0;
-        row < rows;
-        row++
-      ) {
-        for (
-          let col = 0;
-          col < cols - 1;
-          col++
-        ) {
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols - 1; col++) {
           drawSegment(
             points[row][col],
             points[row][col + 1],
             proximities[row][col],
-            proximities[row][col + 1]
+            proximities[row][col + 1],
           );
         }
       }
 
       /* Vertical */
 
-      for (
-        let col = 0;
-        col < cols;
-        col++
-      ) {
-        for (
-          let row = 0;
-          row < rows - 1;
-          row++
-        ) {
+      for (let col = 0; col < cols; col++) {
+        for (let row = 0; row < rows - 1; row++) {
           drawSegment(
             points[row][col],
             points[row + 1][col],
             proximities[row][col],
-            proximities[row + 1][col]
+            proximities[row + 1][col],
           );
         }
       }
@@ -527,80 +334,42 @@ const KineticGrid = () => {
          Intersection nodes
          ------------------------------------------------------ */
 
-      for (
-        let row = 0;
-        row < rows;
-        row++
-      ) {
-        for (
-          let col = 0;
-          col < cols;
-          col++
-        ) {
-          const point =
-            points[row][col];
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          const point = points[row][col];
 
-          const proximity =
-            proximities[row][col];
+          const proximity = proximities[row][col];
 
-          const t =
-            proximity *
-            proximity *
-            (3 - 2 * proximity);
+          const t = proximity * proximity * (3 - 2 * proximity);
 
-          const radius =
-            lerp(
-              NODE_BASE_RADIUS,
-              NODE_ACTIVE_RADIUS,
-              t
-            );
+          const radius = lerp(NODE_BASE_RADIUS, NODE_ACTIVE_RADIUS, t);
 
           /* Glow */
 
           if (t > 0.15) {
-            const glowRadius =
-              radius +
-              lerp(
-                0,
-                8,
-                (t - 0.15) /
-                  0.85
-              );
+            const glowRadius = radius + lerp(0, 8, (t - 0.15) / 0.85);
 
-            const gradient =
-              ctx.createRadialGradient(
-                point.x,
-                point.y,
-                radius * 0.5,
-                point.x,
-                point.y,
-                glowRadius
-              );
-
-            gradient.addColorStop(
-              0,
-              `rgba(227, 22, 22, ${(t * 0.35).toFixed(
-                3
-              )})`
-            );
-
-            gradient.addColorStop(
-              1,
-              "rgba(227, 22, 22, 0)"
-            );
-
-            ctx.beginPath();
-
-            ctx.arc(
+            const gradient = ctx.createRadialGradient(
+              point.x,
+              point.y,
+              radius * 0.5,
               point.x,
               point.y,
               glowRadius,
-              0,
-              Math.PI * 2
             );
 
-            ctx.fillStyle =
-              gradient;
+            gradient.addColorStop(
+              0,
+              `rgba(227, 22, 22, ${(t * 0.35).toFixed(3)})`,
+            );
+
+            gradient.addColorStop(1, "rgba(227, 22, 22, 0)");
+
+            ctx.beginPath();
+
+            ctx.arc(point.x, point.y, glowRadius, 0, Math.PI * 2);
+
+            ctx.fillStyle = gradient;
 
             ctx.fill();
           }
@@ -609,30 +378,23 @@ const KineticGrid = () => {
 
           ctx.beginPath();
 
-          ctx.arc(
-            point.x,
-            point.y,
-            radius,
-            0,
-            Math.PI * 2
-          );
+          ctx.arc(point.x, point.y, radius, 0, Math.PI * 2);
 
-          ctx.fillStyle =
-            lerpColor(
-              {
-                r: 120,
-                g: 50,
-                b: 50,
-                a: 0.16,
-              },
-              {
-                r: 227,
-                g: 22,
-                b: 22,
-                a: 1,
-              },
-              t
-            );
+          ctx.fillStyle = lerpColor(
+            {
+              r: 120,
+              g: 50,
+              b: 50,
+              a: 0.16,
+            },
+            {
+              r: 227,
+              g: 22,
+              b: 22,
+              a: 1,
+            },
+            t,
+          );
 
           ctx.fill();
         }
@@ -643,33 +405,24 @@ const KineticGrid = () => {
          ------------------------------------------------------ */
 
       for (const ripple of ripples) {
-        if (
-          ripple.radius <= 0
-        ) {
+        if (ripple.radius <= 0) {
           continue;
         }
 
         ctx.beginPath();
 
-        ctx.arc(
-          ripple.x,
-          ripple.y,
-          ripple.radius,
-          0,
-          Math.PI * 2
-        );
+        ctx.arc(ripple.x, ripple.y, ripple.radius, 0, Math.PI * 2);
 
-        ctx.strokeStyle =
-          `rgba(227, 22, 22, ${(ripple.opacity * 0.35).toFixed(
-            3
-          )})`;
+        ctx.strokeStyle = `rgba(227, 22, 22, ${(ripple.opacity * 0.35).toFixed(
+          3,
+        )})`;
 
         ctx.lineWidth = 1.5;
 
         ctx.stroke();
       }
     },
-    [getWarpedPoint]
+    [getWarpedPoint],
   );
 
   /* ----------------------------------------------------------
@@ -678,34 +431,19 @@ const KineticGrid = () => {
 
   const animate = useCallback(
     (now) => {
-      const mouse =
-        mouseRef.current;
+      const mouse = mouseRef.current;
 
-      const target =
-        targetMouseRef.current;
+      const target = targetMouseRef.current;
 
-      mouse.x =
-        lerp(
-          mouse.x,
-          target.x,
-          LERP_SPEED
-        );
+      mouse.x = lerp(mouse.x, target.x, LERP_SPEED);
 
-      mouse.y =
-        lerp(
-          mouse.y,
-          target.y,
-          LERP_SPEED
-        );
+      mouse.y = lerp(mouse.y, target.y, LERP_SPEED);
 
       draw(now);
 
-      animationRef.current =
-        requestAnimationFrame(
-          animate
-        );
+      animationRef.current = requestAnimationFrame(animate);
     },
-    [draw]
+    [draw],
   );
 
   /* ----------------------------------------------------------
@@ -713,209 +451,133 @@ const KineticGrid = () => {
      ---------------------------------------------------------- */
 
   useEffect(() => {
-    const canvas =
-      canvasRef.current;
+    const canvas = canvasRef.current;
 
     if (!canvas) return;
 
-    const resizeCanvas =
-      () => {
-        const parent =
-          canvas.parentElement;
+    const resizeCanvas = () => {
+      const parent = canvas.parentElement;
 
-        if (!parent) return;
+      if (!parent) return;
 
-        const rect =
-          parent.getBoundingClientRect();
+      const rect = parent.getBoundingClientRect();
 
-        const width =
-          rect.width;
+      const width = rect.width;
 
-        const height =
-          rect.height;
+      const height = rect.height;
 
-        const dpr =
-          Math.min(
-            window.devicePixelRatio ||
-              1,
-            2
-          );
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-        canvas.width =
-          Math.floor(
-            width * dpr
-          );
+      canvas.width = Math.floor(width * dpr);
 
-        canvas.height =
-          Math.floor(
-            height * dpr
-          );
+      canvas.height = Math.floor(height * dpr);
 
-        canvas.style.width =
-          `${width}px`;
+      canvas.style.width = `${width}px`;
 
-        canvas.style.height =
-          `${height}px`;
+      canvas.style.height = `${height}px`;
 
-        const ctx =
-          canvas.getContext(
-            "2d"
-          );
+      const ctx = canvas.getContext("2d");
 
-        if (ctx) {
-          ctx.setTransform(
-            dpr,
-            0,
-            0,
-            dpr,
-            0,
-            0
-          );
-        }
+      if (ctx) {
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
 
-        sizeRef.current = {
-          width,
-          height,
-        };
+      sizeRef.current = {
+        width,
+        height,
       };
+    };
 
     resizeCanvas();
 
-    window.addEventListener(
-      "resize",
-      resizeCanvas
-    );
+    window.addEventListener("resize", resizeCanvas);
 
     /* Mouse movement */
 
-    const handleMouseMove =
-      (event) => {
-        const rect =
-          canvas.getBoundingClientRect();
+    const handleMouseMove = (event) => {
+      const rect = canvas.getBoundingClientRect();
 
-        targetMouseRef.current = {
-          x:
-            event.clientX -
-            rect.left,
+      targetMouseRef.current = {
+        x: event.clientX - rect.left,
 
-          y:
-            event.clientY -
-            rect.top,
-        };
+        y: event.clientY - rect.top,
       };
+    };
 
     /* Mouse leaving Hero */
 
-    const handleMouseLeave =
-      () => {
-        targetMouseRef.current = {
-          x: -9999,
-          y: -9999,
-        };
+    const handleMouseLeave = () => {
+      targetMouseRef.current = {
+        x: -9999,
+        y: -9999,
       };
+    };
 
     /* Click ripple */
 
-    const handleClick =
-      (event) => {
-        const rect =
-          canvas.getBoundingClientRect();
+    const handleClick = (event) => {
+      const rect = canvas.getBoundingClientRect();
 
-        const x =
-          event.clientX -
-          rect.left;
+      const x = event.clientX - rect.left;
 
-        const y =
-          event.clientY -
-          rect.top;
+      const y = event.clientY - rect.top;
 
-        if (
-          x >= 0 &&
-          x <= rect.width &&
-          y >= 0 &&
-          y <= rect.height
-        ) {
-          ripplesRef.current.push({
-            x,
-            y,
-            radius: 0,
-            opacity: 1,
-            born:
-              performance.now(),
-          });
+      if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+        ripplesRef.current.push({
+          x,
+          y,
+          radius: 0,
+          opacity: 1,
+          born: performance.now(),
+        });
 
-          if (
-            ripplesRef.current
-              .length > 8
-          ) {
-            ripplesRef.current.shift();
-          }
+        if (ripplesRef.current.length > 8) {
+          ripplesRef.current.shift();
         }
-      };
+      }
+    };
 
-    const hero =
-      canvas.parentElement;
+    const hero = canvas.parentElement;
 
     if (hero) {
-      hero.addEventListener(
-        "mousemove",
-        handleMouseMove
-      );
+      hero.addEventListener("mousemove", handleMouseMove);
 
-      hero.addEventListener(
-        "mouseleave",
-        handleMouseLeave
-      );
+      hero.addEventListener("mouseleave", handleMouseLeave);
 
-      hero.addEventListener(
-        "click",
-        handleClick
-      );
+      hero.addEventListener("click", handleClick);
     }
 
-    animationRef.current =
-      requestAnimationFrame(
-        animate
-      );
+    animationRef.current = requestAnimationFrame(animate);
 
     return () => {
-      window.removeEventListener(
-        "resize",
-        resizeCanvas
-      );
+      window.removeEventListener("resize", resizeCanvas);
 
       if (hero) {
-        hero.removeEventListener(
-          "mousemove",
-          handleMouseMove
-        );
+        hero.removeEventListener("mousemove", handleMouseMove);
 
-        hero.removeEventListener(
-          "mouseleave",
-          handleMouseLeave
-        );
+        hero.removeEventListener("mouseleave", handleMouseLeave);
 
-        hero.removeEventListener(
-          "click",
-          handleClick
-        );
+        hero.removeEventListener("click", handleClick);
       }
 
-      if (
-        animationRef.current
-      ) {
-        cancelAnimationFrame(
-          animationRef.current
-        );
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
       }
     };
   }, [animate]);
+
+  /*
+    IMPORTANT:
+    "hidden md:block" means:
+    - Mobile: canvas is not displayed
+    - Tablet/Desktop: canvas is displayed and animated
+  */
 
   return (
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className="absolute inset-0 z-0 h-full w-full pointer-events-none"
+      className="absolute inset-0 z-0 hidden h-full w-full pointer-events-none md:block"
     />
   );
 };
@@ -939,30 +601,15 @@ const bounceLoop = {
    TYPEWRITER
    ============================================================ */
 
-const useTypewriter = (
-  text,
-  speed = 100,
-  pause = 1500
-) => {
-  const [
-    displayed,
-    setDisplayed,
-  ] = useState(
-    text && text.length
-      ? text[0]
-      : ""
+const useTypewriter = (text, speed = 100, pause = 1500) => {
+  const [displayed, setDisplayed] = useState(
+    text && text.length ? text[0] : "",
   );
 
-  const [
-    isTyping,
-    setIsTyping,
-  ] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
 
   useEffect(() => {
-    let i =
-      text && text.length
-        ? 1
-        : 0;
+    let i = text && text.length ? 1 : 0;
 
     let forward = true;
 
@@ -974,70 +621,46 @@ const useTypewriter = (
     const run = () => {
       setIsTyping(true);
 
-      interval =
-        setInterval(() => {
-          if (forward) {
-            setDisplayed(
-              text.slice(
-                0,
-                i + 1
-              )
-            );
+      interval = setInterval(() => {
+        if (forward) {
+          setDisplayed(text.slice(0, i + 1));
 
-            i++;
+          i++;
 
-            if (
-              i ===
-              text.length
-            ) {
-              clearInterval(
-                interval
-              );
+          if (i === text.length) {
+            clearInterval(interval);
 
-              interval = null;
+            interval = null;
 
-              setIsTyping(false);
+            setIsTyping(false);
 
-              timeout =
-                setTimeout(() => {
-                  forward = false;
-                  run();
-                }, pause);
-            }
-          } else {
-            setDisplayed(
-              text.slice(
-                0,
-                i
-              )
-            );
-
-            i--;
-
-            if (i === 0) {
-              clearInterval(
-                interval
-              );
-
-              interval = null;
-
-              setIsTyping(false);
-
-              const delay =
-                text &&
-                text.length &&
-                text[0] === "B"
-                  ? reducedPause
-                  : pause;
-
-              timeout =
-                setTimeout(() => {
-                  forward = true;
-                  run();
-                }, delay);
-            }
+            timeout = setTimeout(() => {
+              forward = false;
+              run();
+            }, pause);
           }
-        }, speed);
+        } else {
+          setDisplayed(text.slice(0, i));
+
+          i--;
+
+          if (i === 0) {
+            clearInterval(interval);
+
+            interval = null;
+
+            setIsTyping(false);
+
+            const delay =
+              text && text.length && text[0] === "B" ? reducedPause : pause;
+
+            timeout = setTimeout(() => {
+              forward = true;
+              run();
+            }, delay);
+          }
+        }
+      }, speed);
     };
 
     if (i > 0) {
@@ -1046,23 +669,16 @@ const useTypewriter = (
 
     return () => {
       if (interval) {
-        clearInterval(
-          interval
-        );
+        clearInterval(interval);
       }
 
       if (timeout) {
-        clearTimeout(
-          timeout
-        );
+        clearTimeout(timeout);
       }
     };
   }, [text, speed, pause]);
 
-  return [
-    displayed,
-    isTyping,
-  ];
+  return [displayed, isTyping];
 };
 
 /* ============================================================
@@ -1070,22 +686,12 @@ const useTypewriter = (
    ============================================================ */
 
 const Hero = () => {
-  const [
-    typedName,
-    isTyping,
-  ] = useTypewriter(
-    "BOLUWATIFE AKOTUN",
-    120,
-    1500
-  );
+  const [typedName, isTyping] = useTypewriter("BOLUWATIFE AKOTUN", 120, 1500);
 
   return (
-    <div
-      id="top"
-      className="relative overflow-hidden bg-[#F6F3EC]"
-    >
+    <div id="top" className="relative overflow-hidden bg-[#F6F3EC]">
       {/* ======================================================
-          KINETIC GRID — HERO ONLY
+          KINETIC GRID — DESKTOP / TABLET ONLY
           ====================================================== */}
 
       <KineticGrid />
@@ -1175,20 +781,14 @@ const Hero = () => {
           >
             HI, MY NAME IS
             <br />
-
             {typedName}
-
             <motion.span
               aria-hidden
               className="ml-1 inline-block h-[0.95em] w-0.5 align-bottom bg-[#E31616]"
               animate={
                 isTyping
                   ? {
-                      opacity: [
-                        1,
-                        0,
-                        1,
-                      ],
+                      opacity: [1, 0, 1],
                     }
                   : {
                       opacity: 1,
@@ -1265,8 +865,8 @@ const Hero = () => {
           >
             I am a Business Data Analyst who transforms complex data into
             actionable insights that drive smarter business decision. Using
-            Power Bi, SQL, and Excel, I uncover trends, optimize reporting,
-            and help businesses make data-driven decisions with confidence.
+            Power Bi, SQL, and Excel, I uncover trends, optimize reporting, and
+            help businesses make data-driven decisions with confidence.
           </motion.p>
 
           {/* ==================================================
