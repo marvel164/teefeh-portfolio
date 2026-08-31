@@ -10,6 +10,7 @@ import Projects from "./assets/components/Projects";
 import ServiceCard from "./assets/components/ServiceCard";
 import Skills from "./assets/components/Skills";
 import FeaturedProfile from "./assets/components/FeaturedProfile";
+import AboutData from "./assets/components/AboutData";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
       <div className="pt-16">
         <Hero />
         <FeaturedProfile />
+        <AboutData />
         <ServiceCard />
         <Projects />
         <Expertise />

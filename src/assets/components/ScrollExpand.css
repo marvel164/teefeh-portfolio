@@ -1,3 +1,4 @@
+
 .scroll-expand {
   position: relative;
   width: 100%;
@@ -33,133 +34,156 @@
 .scroll-expand__frame {
   position: absolute;
   inset: 0;
-
   clip-path: inset(19% 26% 19% 26% round 24px);
-
-  will-change: clip-path;
   overflow: hidden;
+  will-change: clip-path;
 }
 
+/*
+  IMAGE
+  ------------------------------------------------------------
+  Keep the subject centered and reduce unnecessary cropping.
+  The image remains responsive while the frame expands.
+*/
 .scroll-expand__media {
   position: absolute;
   inset: 0;
-
   width: 100%;
   height: 100%;
-
-  object-fit: cover;
-
+  object-fit: contain;
+  object-position: center center;
   will-change: transform;
-
-  transform-origin: center;
-
+  transform-origin: center center;
   user-select: none;
   -webkit-user-drag: none;
+  display: block;
+}
 
-  transition: none;
+/*
+  Subtle background behind the image.
+  This prevents awkward empty areas from looking broken when
+  the original image aspect ratio differs from the frame.
+*/
+.scroll-expand__frame {
+  background: #f6f3ec;
 }
 
 .scroll-expand__scrim {
   position: absolute;
   inset: 0;
-
   pointer-events: none;
-
   background: linear-gradient(
     to top,
     rgba(0, 0, 0, 0.72),
     rgba(0, 0, 0, 0.12) 48%,
     rgba(0, 0, 0, 0.35)
   );
-
   opacity: 0;
 }
 
 .scroll-expand__overlay {
   position: absolute;
   inset: 0;
-
   display: flex;
   flex-direction: column;
-
   align-items: center;
   justify-content: center;
-
   text-align: center;
-
   padding: 6%;
-
   opacity: 0;
-
   will-change: opacity, transform;
-
   color: white;
 }
 
 .scroll-expand__title {
   position: absolute;
   inset: 0;
-
   display: flex;
-
   align-items: center;
   justify-content: center;
-
   margin: 0;
-
   padding: 0 6%;
-
   text-align: center;
-
   font-size: var(--se-title-size);
   font-weight: 700;
-
   letter-spacing: -0.035em;
   line-height: 1;
-
   color: #ffffff;
-
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
-
   pointer-events: none;
-
   will-change: opacity, transform;
 }
 
 .scroll-expand__hint {
   position: absolute;
-
   left: 0;
   right: 0;
-
   bottom: 1.5rem;
-
   text-align: center;
-
   font-family: Inter, sans-serif;
-
   font-size: 0.75rem;
-
   font-weight: 600;
-
   letter-spacing: 0.12em;
-
   text-transform: uppercase;
-
   color: rgba(255, 255, 255, 0.7);
-
   pointer-events: none;
-
   will-change: opacity, transform;
 }
 
-/* -------------------------------------------------------
-   Responsive
-------------------------------------------------------- */
+/* ------------------------------------------------------------
+   TABLET
+------------------------------------------------------------ */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .scroll-expand__frame {
+    clip-path: inset(15% 14% 15% 14% round 22px);
+  }
+
+  .scroll-expand__media {
+    object-fit: contain;
+    object-position: center center;
+  }
+
+  .scroll-expand__title {
+    font-size: clamp(42px, 7vw, 68px);
+  }
+}
+
+/* ------------------------------------------------------------
+   DESKTOP
+------------------------------------------------------------ */
+
+@media (min-width: 1025px) {
+  .scroll-expand__frame {
+    clip-path: inset(13% 12% 13% 12% round 24px);
+  }
+
+  .scroll-expand__media {
+    object-fit: contain;
+    object-position: center center;
+  }
+
+  .scroll-expand__title {
+    font-size: clamp(48px, 7.5vw, 84px);
+  }
+
+  .scroll-expand__overlay {
+    padding: 5%;
+  }
+}
+
+/* ------------------------------------------------------------
+   MOBILE
+------------------------------------------------------------ */
 
 @media (max-width: 768px) {
   .scroll-expand__frame {
     clip-path: inset(16% 10% 16% 10% round 18px);
+  }
+
+  .scroll-expand__media {
+    object-fit: contain;
+    object-position: center center;
   }
 
   .scroll-expand__title {
@@ -171,6 +195,10 @@
     font-size: 0.65rem;
   }
 }
+
+/* ------------------------------------------------------------
+   REDUCED MOTION
+------------------------------------------------------------ */
 
 @media (prefers-reduced-motion: reduce) {
   .scroll-expand__media {

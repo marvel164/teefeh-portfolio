@@ -1,0 +1,297 @@
+.scroll-stack-scroller {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  overflow: visible;
+  background: #f6f3ec;
+}
+
+.scroll-stack-inner {
+  width: 100%;
+  padding: 12vh 6vw 30vh;
+}
+
+/* ==========================================================
+   CARD
+   ========================================================== */
+
+.scroll-stack-card {
+  position: relative;
+
+  width: 100%;
+  max-width: 1050px;
+  height: 420px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  padding: 52px;
+
+  box-sizing: border-box;
+
+  border-radius: 32px;
+
+  transform-origin: top center;
+  transform-style: preserve-3d;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  /*
+   * Transform is controlled entirely by ScrollStack.jsx.
+   * A CSS transition here would fight the scroll animation
+   * and can cause visible shaking.
+   */
+  transition: none !important;
+
+  will-change: transform;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+
+  overflow: hidden;
+
+  /*
+   * Helps the browser keep the stacked cards
+   * on a stable compositing layer.
+   */
+  isolation: isolate;
+}
+
+/* ==========================================================
+   CARD COLORS
+   ========================================================== */
+
+.scroll-stack-card:nth-child(1) {
+  background: #e31616;
+  color: #ffffff;
+}
+
+.scroll-stack-card:nth-child(2) {
+  background: #ffffff;
+  color: #252525;
+}
+
+.scroll-stack-card:nth-child(3) {
+  background: #252525;
+  color: #ffffff;
+}
+
+.scroll-stack-card:nth-child(4) {
+  background: #e31616;
+  color: #ffffff;
+}
+
+.scroll-stack-card:nth-child(5) {
+  background: #ffffff;
+  color: #252525;
+}
+
+/* ==========================================================
+   CARD LIGHT EFFECT
+   ========================================================== */
+
+.scroll-stack-card::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background: radial-gradient(
+    circle at 85% 15%,
+    rgba(255, 255, 255, 0.12),
+    transparent 35%
+  );
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+.scroll-stack-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ==========================================================
+   STACK END
+   ========================================================== */
+
+.scroll-stack-end {
+  width: 100%;
+  height: 1px;
+}
+
+/* ==========================================================
+   NUMBER
+   ========================================================== */
+
+.scroll-stack-number {
+  display: block;
+
+  margin-bottom: 24px;
+
+  font-family: Inter, sans-serif;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 0.2em;
+
+  text-transform: uppercase;
+
+  opacity: 0.55;
+}
+
+/* ==========================================================
+   HEADING
+   ========================================================== */
+
+.scroll-stack-card h3 {
+  margin: 0;
+
+  font-family: Inter, sans-serif;
+
+  font-size: clamp(38px, 5vw, 72px);
+
+  font-weight: 700;
+
+  line-height: 1;
+
+  letter-spacing: -0.045em;
+}
+
+/* ==========================================================
+   DESCRIPTION
+   ========================================================== */
+
+.scroll-stack-card p {
+  max-width: 650px;
+
+  margin: 28px 0 0;
+
+  font-family: Inter, sans-serif;
+
+  font-size: 16px;
+
+  line-height: 1.8;
+
+  opacity: 0.72;
+}
+
+/* ==========================================================
+   TOOLS
+   ========================================================== */
+
+.scroll-stack-tools {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-top: 30px;
+}
+
+.scroll-stack-tool {
+  display: inline-flex;
+
+  align-items: center;
+
+  padding: 9px 14px;
+
+  border: 1px solid currentColor;
+
+  border-radius: 999px;
+
+  font-family: Inter, sans-serif;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+
+  opacity: 0.75;
+}
+
+/* ==========================================================
+   HIGHLIGHT
+   ========================================================== */
+
+.scroll-stack-highlight {
+  display: inline-block;
+
+  margin-top: 28px;
+
+  font-family: Inter, sans-serif;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
+
+@media (max-width: 767px) {
+  .scroll-stack-inner {
+    padding: 10vh 18px 24vh;
+  }
+
+  .scroll-stack-card {
+    height: 390px;
+
+    padding: 34px 26px;
+
+    border-radius: 26px;
+  }
+
+  .scroll-stack-number {
+    margin-bottom: 20px;
+
+    font-size: 10px;
+  }
+
+  .scroll-stack-card h3 {
+    font-size: clamp(34px, 10vw, 52px);
+  }
+
+  .scroll-stack-card p {
+    margin-top: 22px;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+  }
+
+  .scroll-stack-tools {
+    margin-top: 24px;
+
+    gap: 8px;
+  }
+
+  .scroll-stack-tool {
+    padding: 8px 11px;
+
+    font-size: 9px;
+  }
+}
+
+/* ==========================================================
+   REDUCED MOTION
+   ========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-stack-card {
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}
